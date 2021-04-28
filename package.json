@@ -1,0 +1,22 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "Daily gadgets",
+  "bin": {
+    "typora": "./src/typora.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Iamxiaozhu/tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Iamxiaozhu/tools/issues"
+  },
+  "homepage": "https://github.com/Iamxiaozhu/tools#readme"
+}
