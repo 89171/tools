@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Daily gadgets",
   "bin": {
-    "typora": "./src/typora.js"
+    "typora": "./src/typora.js",
+    "chrome": "./src/chrome.js",
+    "img2webp": "./src/img2webp"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
