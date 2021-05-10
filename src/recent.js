@@ -4,7 +4,6 @@ const { spawn,exec } = require('child_process')
 const fs = require('fs')
 const path = require('path')
 const { shortPaths, getOption } = require('../util')
-const { cache } = require('sharp')
 
 // fileCheck && fileCreate
 const configPath = path.resolve(__dirname, '../config/recentDir.json')
