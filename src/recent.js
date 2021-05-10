@@ -17,6 +17,7 @@ const recentData = require(configPath)
 // parse Option
 const {option:addPath} = getOption('add')
 const {option:delPath} = getOption('del')
+const {option:filterPath} = getOption('filter')
 const {option:list} = getOption('ls')
 
 // 查看工作区列表
@@ -43,7 +44,10 @@ if(addPath) {
     }else {
         console.warn('Not found!')
     }
-    return   
+    return
+}else if(filterPath){
+    openPath(filterPath)
+    return
 }
 
 if(!recentData || recentData.length === 0){
@@ -51,7 +55,7 @@ if(!recentData || recentData.length === 0){
     return
 }
 // 打开工作区
-!addPath && !delPath && inquirer
+!addPath && !delPath && !filterPath && inquirer
   .prompt([
     {
         type: 'list',
@@ -63,13 +67,17 @@ if(!recentData || recentData.length === 0){
     }
   ])
   .then(answers => {
-    const dirname = recentData.find(item=>item.indexOf(answers.dir) > -1)
+    openPath(answers.dir)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+
+  function openPath(target){
+    const dirname = recentData.find(item=>item.toLocaleLowerCase().indexOf(target.toLocaleLowerCase()) > -1)
     // process.chdir(dirname)
     spawn('code', [dirname])
     recentData.unshift(recentData.splice(recentData.indexOf(dirname),1)[0])
     fs.writeFileSync(configPath,JSON.stringify(recentData))
     console.log(dirname)
-  })
-  .catch(error => {
-    console.error(error)
-  });
+  }
