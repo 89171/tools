@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var inquirer = require('inquirer')
-const { spawn,exec } = require('child_process')
+const { spawn } = require('child_process')
 const fs = require('fs')
 const path = require('path')
 const { shortPaths, getOption } = require('../util')
@@ -26,7 +26,7 @@ if(list === undefined) {
     return
 }
 
-// 添加/删除工作台区
+// 添加/删除/筛选工作台区
 if(addPath) {
     const addResolvePath = recentData.unshift(path.resolve(process.cwd(),addPath))
     const index = recentData.indexOf(addResolvePath)
