@@ -5,7 +5,8 @@
   "bin": {
     "typora": "./src/typora.js",
     "chrome": "./src/chrome.js",
-    "img2webp": "./src/img2webp.js"
+    "img2webp": "./src/img2webp.js",
+    "recent": "./src/recent.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/Iamxiaozhu/tools#readme",
   "dependencies": {
+    "inquirer": "^8.0.0",
     "sharp": "^0.28.1"
   }
 }
