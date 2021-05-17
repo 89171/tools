@@ -2,3 +2,5 @@ config/recentDir.json
 assets
 package-lock.json
 node_modules
+test
+src/sharkdiff.js

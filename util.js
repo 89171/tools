@@ -1,6 +1,7 @@
 const supportImages = ['.png','.jpg','.jpeg','.gif','.svg']
 const params = process.argv.slice(2)
 const path = require('path')
+const glob = require('glob')
 
 // 返回指定Option false:没有指定Option  undefined没有指定Option参数
 const getOption = (option) => {
@@ -15,7 +16,6 @@ const getOption = (option) => {
 
 // reverse返回指定层级路径
 const shortPaths = (paths,deep) => {
-    const list = []
     if(!paths) return
     if(!Array.isArray(paths)){
         paths = [paths]
@@ -31,8 +31,13 @@ const shortPaths = (paths,deep) => {
     })
 }
 
+const filesFilter = (reg,options) => {
+    return glob.sync(reg,options)
+}
+
 module.exports = {
     supportImages,
     getOption,
-    shortPaths
+    shortPaths,
+    filesFilter
 }
