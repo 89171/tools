@@ -8,7 +8,7 @@
 ```bash
 typora dirName | fileName
 ```
->实际上是通过执行open命令打开了Typora。
+>实际上是通过执行open命令打开了应用(也可以通过npm包open 使用默认应用打开指定文件)。
 ```bash
 open -a Typora fileName
 open -a Google\ Chrome fileName
