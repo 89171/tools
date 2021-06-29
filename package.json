@@ -5,6 +5,7 @@
   "bin": {
     "typora": "./src/typora.js",
     "chrome": "./src/chrome.js",
+    "code": "./src/code.js",
     "img2webp": "./src/img2webp.js",
     "recent": "./src/recent.js"
   },
