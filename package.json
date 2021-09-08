@@ -7,7 +7,8 @@
     "chrome": "./src/chrome.js",
     "code": "./src/code.js",
     "img2webp": "./src/img2webp.js",
-    "recent": "./src/recent.js"
+    "recent": "./src/recent.js",
+    "rename": "./src/rename.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
