@@ -8,6 +8,7 @@
     "code": "./src/code.js",
     "img2webp": "./src/img2webp.js",
     "recent": "./src/recent.js",
+    "r": "./src/recent.js",
     "rename": "./src/rename.js"
   },
   "scripts": {

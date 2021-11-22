@@ -10,43 +10,66 @@ const configPath = path.resolve(__dirname, '../config/recentDir.json')
 try {
     fs.statSync(configPath)
 } catch(e) {
-    fs.writeFileSync(configPath,JSON.stringify([]))
+    saveConfig([])
 }
 const recentData = require(configPath)
+
+const saveConfig = (data) => {
+    fs.writeFileSync(configPath,JSON.stringify(data,'','\t'))
+}
 
 // parse Option
 const {option:addPath} = getOption('add')
 const {option:delPath} = getOption('del')
 const {option:filterPath} = getOption('filter')
+const {option:openFilterPath} = getOption('open')
 const {option:list} = getOption('ls')
+const {rest:rest} = getOption()
 
 // 查看工作区列表
 if(list === undefined) {
     console.log(recentData)
     return
+}else if(list){
+    const listData = recentData.filter(item=>item.toLocaleLowerCase().includes(list.toLocaleLowerCase()))
+    if(listData.length === 1){
+        console.log(listData[0])
+    }else{
+        console.log(listData)
+    }
+    return
 }
 
 // 添加/删除/筛选工作台区
 if(addPath) {
-    const addResolvePath = recentData.unshift(path.resolve(process.cwd(),addPath))
+    const addResolvePath = path.resolve(process.cwd(),addPath)
     const index = recentData.indexOf(addResolvePath)
     if(index > -1) {
-        console.warn('Already exists.')
+        // 如果已存在，则置顶
+        const exitsPath = recentData.splice(index,1)
+        exitsPath && exitsPath[0] && recentData.unshift(exitsPath[0])
+    }else{
+        recentData.unshift(path.resolve(process.cwd(),addPath))
     }
-    fs.writeFileSync(configPath,JSON.stringify(recentData))
+    console.warn('Added successfully!')
+    saveConfig(recentData)
     return
 }else if(delPath) {
     const delResolvePath = path.resolve(process.cwd(),delPath)
     const index = recentData.indexOf(delResolvePath)
     if(index > -1) {
         recentData.splice(recentData.indexOf(delResolvePath),1)
-        fs.writeFileSync(configPath,JSON.stringify(recentData))
+        saveConfig(recentData)
+        console.log('Deleted successfully!')
     }else {
         console.warn('Not found!')
     }
     return
-}else if(filterPath){
-    openPath(filterPath)
+}else if(filterPath || openFilterPath){
+    openPath(filterPath || openFilterPath)
+    return
+}else if(rest && rest[0]){
+    openPath(rest[0])
     return
 }
 
@@ -55,7 +78,7 @@ if(!recentData || recentData.length === 0){
     return
 }
 // 打开工作区
-!addPath && !delPath && !filterPath && inquirer
+!addPath && !delPath && !filterPath && !openFilterPath && inquirer
   .prompt([
     {
         type: 'list',
@@ -75,9 +98,10 @@ if(!recentData || recentData.length === 0){
 
   function openPath(target){
     const dirname = recentData.find(item=>item.toLocaleLowerCase().indexOf(target.toLocaleLowerCase()) > -1)
+    if(!dirname) return
     // process.chdir(dirname)
     spawn('code', [dirname])
     recentData.unshift(recentData.splice(recentData.indexOf(dirname),1)[0])
-    fs.writeFileSync(configPath,JSON.stringify(recentData))
+    saveConfig(recentData)
     console.log(dirname)
   }

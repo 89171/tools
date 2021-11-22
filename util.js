@@ -16,7 +16,7 @@ const getOption = (option) => {
 
 // reverse返回指定层级路径
 const shortPaths = (paths,deep) => {
-    if(!paths) return
+    if(!paths || paths.length === 0) return
     if(!Array.isArray(paths)){
         paths = [paths]
     }
