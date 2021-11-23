@@ -27,3 +27,4 @@ recent(简写r)是一个管理本地工作区/文件的小工具，每次添加/
 rename 文件批量重命名(将文件夹中指定字符串替换)
 - rename test 删除当前文件夹及子文件夹，文件名中的test
 - rename test abtest 将当前文件夹及其子文件夹，文件名中的test替换为abtest
+
