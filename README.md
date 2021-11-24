@@ -1,3 +1,8 @@
+## recent已经使用npm包进行安装了,具体可以参考 [recent](https://github.com/Iamxiaozhu/recent-cli)
+```
+npm i -g recent-cli
+```
+
 #### 日常使用的小工具
 > 如果想在本地使用这些小工具，clone之后在代码目录执行 npm i && npm link即可
 ##### macOS
